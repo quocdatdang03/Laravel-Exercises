@@ -18,11 +18,22 @@ class TaskService {
     {
         try {
             $params['status'] = 1;
-            
+            //DB::table('tasks')->insert('name', $params);
             return $this->model->create($params);
         } catch (Exception $exception) {
             Log::error($exception);
 
+            return false;
+        }
+    }
+
+     public function update($task, $params)
+    {
+        try {
+            $task->update($params);
+            return $task;
+        } catch (Exception $exception) {
+            Log::error($exception);
             return false;
         }
     }

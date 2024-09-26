@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Task\CreateRequest;
+use App\Http\Requests\Api\Task\UpdateRequest;
 use App\Http\Resources\TaskResource;
 use App\Models\Task;
 use App\Services\TaskService;
@@ -40,5 +41,19 @@ class TaskController extends Controller
     public function show(Task $task)
     {
         return new TaskResource($task);
+    }
+
+    public function update(UpdateRequest $updateRequest, Task $task)
+    {
+        $request = $updateRequest->validated();
+        $result = $this->taskService->update($task, $request);
+
+        if ($result) {
+            return new TaskResource($result);
+        }
+
+        return response()->json([
+            'message' => 'error'
+        ]);
     }
 }

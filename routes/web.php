@@ -19,5 +19,8 @@ Route::get('/', function () {
     // return response()->json(['message' => 'Hello Worldddd!']);
 });
 
-Route::get('/products', [ProductController::class, 'index']);
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products/edit/{product}', [ProductController::class, 'edit'])->name('products.edit');
+Route::put('products/{product}', [ProductController::class, 'update'])->name('products.update');
+
 Route::get('/products/{product}', [ProductController::class, 'show']);

@@ -16,4 +16,9 @@ class ProductService
     {
         return $this->product->where('price', '>', 50)->get();
     }
+
+    public function update($product, $params)
+    {
+        return $product->update($params);
+    }
 }

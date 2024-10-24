@@ -56,4 +56,8 @@
     .btn-primary:hover {
         background-color: #0056b3;
     }
+
+    .text-danger {
+        color: red;
+    }
 </style>

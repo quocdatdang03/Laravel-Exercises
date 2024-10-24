@@ -1,43 +1,92 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
 
-<h2>Product</h2>
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
+        h1 {
+            text-align: center;
+            color: #333;
+        }
 
-<table class="product-table">
-    <thead>
-        <tr>
-            <th class="product-header">Name</th>
-            <th class="product-header">Description</th>
-            <th class="product-header">Price</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr class="product-row">
-            <td class="product-cell">{{ $product->name }}</td>
-            <td class="product-cell">{{ $product->description }}</td>
-            <td class="product-cell">{{ $product->price }}</td>
-        </tr>
-    </tbody>
-</table>
+        .product-field {
+            margin: 15px 0;
+        }
 
+        .product-field label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
 
-<style>
-    .product-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 20px;
-    }
-    .product-header {
-        background-color: #f2f2f2;
-        font-weight: bold;
-        text-align: left;
-        padding: 10px;
-        border-bottom: 2px solid #ddd;
-    }
-    .product-row:nth-child(even) {
-        background-color: #f9f9f9;
-    }
-    .product-cell {
-        padding: 10px;
-        border-bottom: 1px solid #ddd;
-    }
-</style>
+        .product-field p {
+            margin: 0;
+            font-size: 18px;
+            color: #000;
+        }
+
+        .price {
+            color: #e74c3c;
+            font-size: 24px;
+        }
+
+        .btn-secondary {
+            background-color: #545658;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn-primary:hover {
+            background-color: #363738;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Product Details</h1>
+        
+        <div class="product-field">
+            <label for="productName">Name:</label>
+            <p id="productName">{{ $product->name }}</p>
+        </div>
+        
+        <div class="product-field">
+            <label for="description">Description:</label>
+            <p id="description">{{ $product->description }}</p>
+        </div>
+        
+        <div class="product-field">
+            <label for="price">Price:</label>
+            <p id="price" class="price">{{ $product->price }}</p>
+        </div>
+
+         <a class="btn btn-secondary" 
+            href="{{ route('products.index') }}">
+            Back to list
+        </a>
+    </div>
+
+</body>
+</html>

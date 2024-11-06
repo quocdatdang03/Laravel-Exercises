@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Auth\LoginRequest;
 use App\Http\Requests\Api\Auth\RegisterRequest;
 use App\Http\Resources\Auth\UserResource;
 use App\Services\AuthService;
@@ -27,5 +28,18 @@ class AuthController extends Controller
         }
 
         return response()->api_error('Register error');
+    }
+
+    public function login(LoginRequest $loginRequest)
+    {
+        $params = $loginRequest->validated();
+
+        $result = $this->authService->login($params);
+
+        if ($result['status']) {
+            return response()->api_success('Login success', $result);
+        }
+
+        return response()->api_error('Login error', $result['message']);
     }
 }

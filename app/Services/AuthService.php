@@ -3,6 +3,7 @@ namespace App\Services;
 
 use App\Models\User;
 use Exception;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
 class AuthService {
@@ -22,5 +23,27 @@ class AuthService {
 
             return false;
         }
+    }
+
+    public function login($params)
+    {
+        $user = $this->user->where('email', $params['email'])->first();
+
+        $isPasswordValid = Hash::check($params['password'], $user->password);
+
+        if (!$isPasswordValid) {
+            return [
+                'status' => false,
+                'message' => 'Invalid password and email',
+            ];
+        }
+
+        $token = $user->createToken('user')->plainTextToken;
+
+        return [
+            'status' => true,
+            'access_token' => $token,
+            'name' => $user->name,
+        ];
     }
 }

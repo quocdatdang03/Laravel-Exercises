@@ -16,7 +16,9 @@ class ProductService
 
     public function getList()
     {
-        return $this->product->where('price', '>', 50)->orderByDesc('id')->get();
+        // return $this->product->where('price', '>', 50)->orderByDesc('id')->get();
+        return $this->product->orderByDesc('id')->get();
+
     }
 
     public function update($product, $params)
